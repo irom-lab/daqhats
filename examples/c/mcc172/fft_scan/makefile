@@ -1,8 +1,8 @@
 NAME = fft_scan
 OBJ = $(NAME).o
 DEPS = kiss_fft/kiss_fftr.o kiss_fft/kiss_fft.o
-LIBS = -ldaqhats -lm
-CFLAGS = -Wall -I/usr/local/include -Ikiss_fft -g
+LIBS = -ldaqhats -lm -lbcm_host
+CFLAGS = -Wall -I/usr/local/include -Ikiss_fft -g -L/opt/vc/lib
 CC = gcc
 EXTENSION = .c
 

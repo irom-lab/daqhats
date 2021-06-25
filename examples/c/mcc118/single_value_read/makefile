@@ -1,7 +1,7 @@
 NAME = single_value_read
 OBJ = $(NAME).o
-LIBS = -ldaqhats
-CFLAGS = -Wall -I/usr/local/include -I./ -g
+LIBS = -ldaqhats -lm -lbcm_host
+CFLAGS = -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
 CC = gcc
 EXTENSION = .c
 

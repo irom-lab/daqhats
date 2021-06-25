@@ -1,7 +1,7 @@
 NAME = multi_hat_synchronous_scan
 OBJ = $(NAME).o
-LIBS = -ldaqhats
-CFLAGS = -Wall -I/usr/local/include -I./ -g
+LIBS = -ldaqhats -lm -lbcm_host
+CFLAGS = -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
 CC = gcc
 EXTENSION = .c
 

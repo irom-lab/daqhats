@@ -1,7 +1,7 @@
 NAME = analog_output_write_all
 OBJ = $(NAME).o
-LIBS = -ldaqhats -lm
-CFLAGS = -Wall -I/usr/local/include -I./ -g
+LIBS = -ldaqhats -lm -lbcm_host
+CFLAGS = -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
 CC = gcc
 EXTENSION = .c
 

@@ -1,7 +1,7 @@
 NAME = logger
 OBJ = $(NAME).o log_file.o errors.o
-LIBS = -ldaqhats -lgtkdatabox -pthread `pkg-config --libs gtk+-3.0` -lm
-CFLAGS = `pkg-config --cflags gtk+-3.0`
+LIBS = -ldaqhats -lgtkdatabox -pthread `pkg-config --libs gtk+-3.0` -lm -lbcm_host
+CFLAGS = `pkg-config --cflags gtk+-3.0` -L/opt/vc/lib
 
 CC = gcc
 

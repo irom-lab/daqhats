@@ -1,7 +1,7 @@
 NAME = digital_input_read_port
 OBJ = $(NAME).o
-LIBS = -ldaqhats
-CFLAGS = -Wall -I/usr/local/include -g
+LIBS = -ldaqhats -lbcm_host -lm
+CFLAGS = -Wall -I/usr/local/include -g -L/opt/vc/lib
 CC = gcc
 EXTENSION = .c
 
