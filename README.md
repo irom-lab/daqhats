@@ -36,12 +36,16 @@ The specific pins used by each DAQ HAT are documented in the electrical
 specifications for that device.
 
 ## Prerequisites
-- Raspbian or Raspbian Lite image (may work with other Raspberry Pi operating systems)
+- Raspbian, Raspbian Lite, or 64-bit Ubuntu Server 20.04 LTS for raspberry pi 4B+ image
+  (may work with other Raspberry Pi operating systems)
 - Raspberry Pi with 40-pin GPIO header
 - C, C++, Python 2.7 or Python 3.4
 
 ## Raspberry Pi Configuration
 Follow the instructions at https://www.raspberrypi.org/help/ for setting up a Raspberry Pi.
+
+The 64-bit Ubuntu Server 20.04 LTS for raspberry pi 4B+ image can be installed
+following the instructions at https://ubuntu.com/download/raspberry-pi
 
 ## Install Instructions
 1. Power off the Raspberry Pi and attach one or more DAQ HAT boards, using unique
@@ -68,13 +72,36 @@ Follow the instructions at https://www.raspberrypi.org/help/ for setting up a Ra
    ```sh
    sudo apt install git
    ```
-6. Download the daqhats library to the root of your home folder:
+6. **Optional - BUT VERY IMPORTANT:** For 64-bit Ubuntu Server 20.04 LTS for
+   raspberry pi 4B+ image, some other dependancies are needed:
+
+   ```sh
+   # Install depandancies:
+   sudo apt install -y build-essential cmake \
+                       libraspberrypi-dev libraspberrypi-bin \
+                       at-spi2-core autoconf libtool libgtk-3-dev
+
+   # Build and install raspberrypi/userland:
+   git clone https://github.com/raspberrypi/userland.git
+   cd userland
+   sudo ./buildme --aarch64
+   ```
+7. Download the daqhats library to the root of your home folder:
 
    ```sh
    cd ~
    git clone https://github.com/mccdaq/daqhats.git
    ```
-7. Build and install the shared library, tools, and optional Python support. The
+
+   **Note:** If you are using 64-bit Ubuntu Server 20.04 LTS for raspberry pi 4B+
+   image, you should use following git repository and branch:
+
+   ```sh
+   git clone https://github.com/MrXinWang/daqhats.git
+   cd daqhats
+   git checkout rasp_pi_4b_ubuntu_20_04
+   ```
+8. Build and install the shared library, tools, and optional Python support. The
    installer will install Python 3 support by default and ask if you want to install
    Python 2 support. It will also detect the HAT board EEPROMs and save the contents,
    if needed.
@@ -83,9 +110,9 @@ Follow the instructions at https://www.raspberrypi.org/help/ for setting up a Ra
    cd ~/daqhats
    sudo ./install.sh
    ```
-**Note:** If you encounter any errors during steps 5 - 7 then uininstall the daqhats
+**Note:** If you encounter any errors during steps 5 - 8 then uininstall the daqhats
 library (if installed), go back to step 4, update your installed packages and reboot,
-then repeat steps 5 - 7.
+then repeat steps 5 - 8.
 
 You can now run the example programs under ~/daqhats/examples and create your own
 programs. Refer to the [Examples](#examples) section below for more information.
