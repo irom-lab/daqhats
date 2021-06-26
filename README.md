@@ -110,12 +110,18 @@ following the instructions at https://ubuntu.com/download/raspberry-pi
    cd ~/daqhats
    sudo ./install.sh
    ```
+
 **Note:** If you encounter any errors during steps 5 - 8 then uininstall the daqhats
 library (if installed), go back to step 4, update your installed packages and reboot,
 then repeat steps 5 - 8.
 
 You can now run the example programs under ~/daqhats/examples and create your own
 programs. Refer to the [Examples](#examples) section below for more information.
+
+**Note:** If you want to play with the MCC128 data logger example on 64-bit Ubuntu
+Server 20.04, please check the [README](./examples/c/mcc128/data_logger/README.md)
+for how to build the data logger binary file, especially the `Install the Dependencies`
+section.
 
 If you are using the Raspbian desktop interface, the DAQ HAT Manager utility will be
 available under the Accessories start menu. This utility will allow you to list the
