@@ -49,7 +49,7 @@ def main():
             raise Exception(error_message)
 
         # Get an instance of the selected hat device object.
-        address = select_hat_device(HatIDs.MCC_118)
+        address = select_hat_device(HatIDs.MCC_118) # raise HAT error
         hat = mcc118(address)
 
         print('\nMCC 118 single data value read example')

@@ -26,10 +26,13 @@ def select_hat_device(filter_by_id):
         Exception: No HAT devices are found or an invalid address was selected.
 
     """
+    print('Hello from daqhats_utils.py')
+    print('filter_by_id: ' + str(filter_by_id))
     selected_hat_address = None
 
     # Get descriptors for all of the available HAT devices.
     hats = hat_list(filter_by_id=filter_by_id)
+    print('hats: ' + str(hats))
     number_of_hats = len(hats)
 
     # Verify at least one HAT device is detected.

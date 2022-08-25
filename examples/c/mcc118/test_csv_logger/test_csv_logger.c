@@ -4,10 +4,10 @@
         mcc118_a_in_read
 
     Purpose:
-        Read a single data value for each channel in a loop.
+        Read a single data value for each channel in a loop, log to csv.
 
     Description:
-        This example demonstrates acquiring data using a software timed loop
+        This script demonstrates acquiring data using a software timed loop
         to read a single value from each selected channel on each iteration
         of the loop.
 
@@ -23,15 +23,26 @@ int main()
     double value;
 
     uint8_t low_chan = 0;
-    uint8_t high_chan = 4;
+    uint8_t high_chan = 4; //Pentagon
 
     char display_string[256] = "";
     char c;
 
     int result = RESULT_SUCCESS;
     int samples_per_channel = 0;
-    int sample_interval = 500;  // ms
+    int sample_interval = 100;  // ms
+    int duration = 10; // s
+    int duration_samples = 1000/sample_interval*duration;
+    printf("\nduration_samples\n");
+    printf("%d\n", duration_samples);
     int mcc118_num_channels = mcc118_info()->NUM_AI_CHANNELS;
+
+    // Set the default filename.
+    FILE *fpt;
+    fpt = fopen("data.csv", "w+");
+    fprintf(fpt,"A0, A1, A2, A3, A4,\n");
+    //fprintf(fpt,"value\n");
+
 
     // Ensure low_chan and high_chan are valid
     if ((low_chan >= mcc118_num_channels) || 
@@ -81,7 +92,8 @@ int main()
     }
     printf("\n");
 
-    while (!enter_press())
+
+    while (!enter_press() && samples_per_channel < duration_samples)
     {
         // Display the updated samples per channel
         printf("\r%17d", ++samples_per_channel);
@@ -91,11 +103,14 @@ int main()
             result = mcc118_a_in_read(address, channel, options, &value);
             STOP_ON_ERROR(result);
             printf("%12.5f V", value);
+            fprintf(fpt,"%12.5f,", value);
         }
+        fprintf(fpt,"\n");
 
         fflush(stdout);
         usleep(sample_interval * 1000);
     }
+    fclose(fpt);
 
 stop:
     result = mcc118_close(address);

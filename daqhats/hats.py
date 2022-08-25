@@ -114,9 +114,12 @@ def _load_daqhats_library():
     Load the library
     """
     libname = 'libdaqhats.so.1'
+    #libname = 'libdaqhats.so'
+
     try:
         lib = cdll.LoadLibrary(libname)
     except: # pylint: disable=bare-except
+        print("Failed to load the library")
         lib = 0
     return lib
 
@@ -145,8 +148,10 @@ def hat_list(filter_by_id=0):
         * **version** (int): device hardware version
         * **product_name** (str): device product name
     """
+    print("Hello from hat_list")
     _libc = _load_daqhats_library()
     if _libc == 0:
+        print("_libc = " + str(_libc))
         return []
 
     _libc.hat_list.argtypes = [c_ushort, POINTER(_Info)]

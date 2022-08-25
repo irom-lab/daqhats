@@ -1,0 +1,247 @@
+ubuntu@ubuntu:~/daqhats$ sudo ./install.sh
+Building and installing library
+
+make: Entering directory '/home/ubuntu/daqhats/lib'
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c util.c -o build/util.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc118.c -o build/mcc118.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc152.c -o build/mcc152.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc152_dac.c -o build/mcc152_dac.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc152_dio.c -o build/mcc152_dio.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c gpio.c -o build/gpio.o
+gpio.c: In function ‘gpio_init’:
+gpio.c:111:36: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+  111 |         printf("mmap failed %d\n", (int)gpio_map);
+      |                                    ^
+gpio.c: In function ‘gpio_interrupt_callback’:
+gpio.c:248:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  248 |         write(fd, buffer, strlen(buffer));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:268:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  268 |     read(event_fd, buffer, 32);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:284:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  284 |         write(event_fd, mode_string, strlen(mode_string));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:303:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  303 |         write(event_fd, mode_string, strlen(mode_string));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:332:9: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  332 |         read(value_fd, buffer, 1);
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c: In function ‘gpio_interrupt_thread’:
+gpio.c:201:13: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  201 |             read(gpio_int_read_fds[pin], &c, 1);
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c: In function ‘gpio_wait_for_low’:
+gpio.c:372:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  372 |         write(fd, buffer, strlen(buffer));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:390:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  390 |     read(value_fd, buffer, 1);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:402:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  402 |     read(event_fd, buffer, 32);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:407:9: warning: ignoring return value of ‘write’, declared with attribute warn_unused_result [-Wunused-result]
+  407 |         write(event_fd, buffer, strlen(buffer));
+      |         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:415:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  415 |     read(value_fd, buffer, 1);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
+gpio.c:419:5: warning: ignoring return value of ‘read’, declared with attribute warn_unused_result [-Wunused-result]
+  419 |     read(value_fd, buffer, 1);
+      |     ^~~~~~~~~~~~~~~~~~~~~~~~~
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c cJSON.c -o build/cJSON.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc134.c -o build/mcc134.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc134_adc.c -o build/mcc134_adc.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c nist.c -o build/nist.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc172.c -o build/mcc172.o
+gcc -I../include -I/opt/vc/include -fPIC -Wall -Wextra -g -O2 -DENABLE_LOCALES=Off -MMD -c mcc128.c -o build/mcc128.o
+gcc -L/opt/vc/lib -shared -pthread -lm -lbcm_host -Wl,-soname,libdaqhats.so.1 -o build/libdaqhats.so.1.4.0.1 build/util.o build/mcc118.o build/mcc152.o build/mcc152_dac.o build/mcc152_dio.o build/gpio.o build/cJSON.o build/mcc134.o build/mcc134_adc.o build/nist.o build/mcc172.o build/mcc128.o
+make: Leaving directory '/home/ubuntu/daqhats/lib'
+make: Entering directory '/home/ubuntu/daqhats/lib'
+make[1]: Entering directory '/home/ubuntu/daqhats/include'
+make[1]: Leaving directory '/home/ubuntu/daqhats/include'
+make: Leaving directory '/home/ubuntu/daqhats/lib'
+make: Entering directory '/home/ubuntu/daqhats/lib'
+make: Leaving directory '/home/ubuntu/daqhats/lib'
+
+Building and installing tools
+
+make: Entering directory '/home/ubuntu/daqhats/tools'
+gcc -c -o mcc118_firmware_update.o mcc118_firmware_update.c -I../include -I../lib -g
+gcc -o mcc118_firmware_update mcc118_firmware_update.o -ldaqhats -lm -L/opt/vc/lib -lbcm_host
+gcc -c -o daqhats_list_boards.o daqhats_list_boards.c -I../include -I../lib -g
+gcc -o daqhats_list_boards daqhats_list_boards.o -ldaqhats -lm -L/opt/vc/lib -lbcm_host
+gcc -c -o mcc172_firmware_update.o mcc172_firmware_update.c -I../include -I../lib -g
+gcc -o mcc172_firmware_update mcc172_firmware_update.o -ldaqhats -lm -L/opt/vc/lib -lbcm_host
+gcc -c -o daqhats_check_152.o daqhats_check_152.c -I../include -I../lib -g
+gcc -o daqhats_check_152 daqhats_check_152.o -ldaqhats -lm -L/opt/vc/lib -lbcm_host
+gcc -c -o mcc128_firmware_update.o mcc128_firmware_update.c -I../include -I../lib -g
+gcc -o mcc128_firmware_update mcc128_firmware_update.o -ldaqhats -lm -L/opt/vc/lib -lbcm_host
+make: Leaving directory '/home/ubuntu/daqhats/tools'
+make: Entering directory '/home/ubuntu/daqhats/tools'
+make: Leaving directory '/home/ubuntu/daqhats/tools'
+make: Entering directory '/home/ubuntu/daqhats/tools'
+make: Leaving directory '/home/ubuntu/daqhats/tools'
+
+Building examples
+
+make: Entering directory '/home/ubuntu/daqhats/examples/c'
+make -C mcc152/. all
+make[1]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152'
+make -C digital_input_read_port/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_read_port'
+gcc -c -o digital_input_read_port.o digital_input_read_port.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o digital_input_read_port digital_input_read_port.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lbcm_host -lm
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_read_port'
+make -C analog_output_write_all/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/analog_output_write_all'
+gcc -c -o analog_output_write_all.o analog_output_write_all.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+gcc -o analog_output_write_all analog_output_write_all.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/analog_output_write_all'
+make -C digital_output_write_bit/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_output_write_bit'
+gcc -c -o digital_output_write_bit.o digital_output_write_bit.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o digital_output_write_bit digital_output_write_bit.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_output_write_bit'
+make -C digital_input_read_bit/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_read_bit'
+gcc -c -o digital_input_read_bit.o digital_input_read_bit.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o digital_input_read_bit digital_input_read_bit.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_read_bit'
+make -C analog_output_write/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/analog_output_write'
+gcc -c -o analog_output_write.o analog_output_write.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+gcc -o analog_output_write analog_output_write.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/analog_output_write'
+make -C digital_input_interrupt/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_interrupt'
+gcc -c -o digital_input_interrupt.o digital_input_interrupt.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o digital_input_interrupt digital_input_interrupt.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_input_interrupt'
+make -C digital_output_write_port/. all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_output_write_port'
+gcc -c -o digital_output_write_port.o digital_output_write_port.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o digital_output_write_port digital_output_write_port.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152/digital_output_write_port'
+make[1]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc152'
+make -C mcc118/. all
+make[1]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118'
+make -C continuous_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118/continuous_scan'
+gcc -c -o continuous_scan.o continuous_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o continuous_scan continuous_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118/continuous_scan'
+make -C finite_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118/finite_scan'
+gcc -c -o finite_scan.o finite_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o finite_scan finite_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118/finite_scan'
+make -C finite_scan_with_trigger all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118/finite_scan_with_trigger'
+gcc -c -o finite_scan_with_trigger.o finite_scan_with_trigger.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o finite_scan_with_trigger finite_scan_with_trigger.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118/finite_scan_with_trigger'
+make -C multi_hat_synchronous_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118/multi_hat_synchronous_scan'
+gcc -c -o multi_hat_synchronous_scan.o multi_hat_synchronous_scan.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+multi_hat_synchronous_scan.c: In function ‘main’:
+multi_hat_synchronous_scan.c:249:20: warning: format not a string literal and no format arguments [-Wformat-security]
+  249 |             printf(data_display_output);
+      |                    ^~~~~~~~~~~~~~~~~~~
+gcc -o multi_hat_synchronous_scan multi_hat_synchronous_scan.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118/multi_hat_synchronous_scan'
+make -C single_value_read all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc118/single_value_read'
+gcc -c -o single_value_read.o single_value_read.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+gcc -o single_value_read single_value_read.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118/single_value_read'
+make[1]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc118'
+make -C mcc172/. all
+make[1]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc172'
+make -C continuous_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc172/continuous_scan'
+gcc -c -o continuous_scan.o continuous_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o continuous_scan continuous_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc172/continuous_scan'
+make -C finite_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc172/finite_scan'
+gcc -c -o finite_scan.o finite_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o finite_scan finite_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc172/finite_scan'
+make -C fft_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc172/fft_scan'
+(cd kiss_fft; make all)
+make[3]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc172/fft_scan/kiss_fft'
+gcc -c -o kiss_fft.o kiss_fft.c -Wall -fPIC -O3 -Dkiss_fft_scalar=float
+gcc -c -o kiss_fftr.o kiss_fftr.c -Wall -fPIC -O3 -Dkiss_fft_scalar=float
+make[3]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc172/fft_scan/kiss_fft'
+gcc -c -o fft_scan.o fft_scan.c -Wall -I/usr/local/include -Ikiss_fft -g -L/opt/vc/lib
+gcc -o fft_scan fft_scan.o kiss_fft/kiss_fftr.o kiss_fft/kiss_fft.o -Wall -I/usr/local/include -Ikiss_fft -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc172/fft_scan'
+make[1]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc172'
+make -C mcc128/. all
+make[1]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128'
+make -C continuous_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128/continuous_scan'
+gcc -c -o continuous_scan.o continuous_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o continuous_scan continuous_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128/continuous_scan'
+make -C finite_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128/finite_scan'
+gcc -c -o finite_scan.o finite_scan.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o finite_scan finite_scan.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128/finite_scan'
+make -C finite_scan_with_trigger all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128/finite_scan_with_trigger'
+gcc -c -o finite_scan_with_trigger.o finite_scan_with_trigger.c -Wall -I/usr/local/include -g -L/opt/vc/lib
+gcc -o finite_scan_with_trigger finite_scan_with_trigger.o -Wall -I/usr/local/include -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128/finite_scan_with_trigger'
+make -C multi_hat_synchronous_scan all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128/multi_hat_synchronous_scan'
+gcc -c -o multi_hat_synchronous_scan.o multi_hat_synchronous_scan.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+multi_hat_synchronous_scan.c: In function ‘main’:
+multi_hat_synchronous_scan.c:276:20: warning: format not a string literal and no format arguments [-Wformat-security]
+  276 |             printf(data_display_output);
+      |                    ^~~~~~~~~~~~~~~~~~~
+gcc -o multi_hat_synchronous_scan multi_hat_synchronous_scan.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128/multi_hat_synchronous_scan'
+make -C single_value_read all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc128/single_value_read'
+gcc -c -o single_value_read.o single_value_read.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+gcc -o single_value_read single_value_read.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128/single_value_read'
+make[1]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc128'
+make -C mcc134/. all
+make[1]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc134'
+make -C single_value_read all
+make[2]: Entering directory '/home/ubuntu/daqhats/examples/c/mcc134/single_value_read'
+gcc -c -o single_value_read.o single_value_read.c -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib
+gcc -o single_value_read single_value_read.o -Wall -I/usr/local/include -I./ -g -L/opt/vc/lib -ldaqhats -lm -lbcm_host
+make[2]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc134/single_value_read'
+make[1]: Leaving directory '/home/ubuntu/daqhats/examples/c/mcc134'
+make: Leaving directory '/home/ubuntu/daqhats/examples/c'
+
+Reading DAQ HAT EEPROMs
+
+Expected I2C bus (i2c-3) not found.
+
+Installing library for Python 3
+Processing /home/ubuntu/daqhats
+/usr/local/lib/python3.8/dist-packages/pkg_resources/__init__.py:123: PkgResourcesDeprecationWarning: 0.23ubuntu1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+/usr/local/lib/python3.8/dist-packages/pkg_resources/__init__.py:123: PkgResourcesDeprecationWarning: 0.1.36ubuntu1 is an invalid version and will not be supported in a future release
+  warnings.warn(
+Building wheels for collected packages: daqhats
+  Building wheel for daqhats (setup.py) ... done
+  Created wheel for daqhats: filename=daqhats-1.4.0.1-py3-none-any.whl size=42290 sha256=bf2c9818d283d9dcadda061d2735f891a20cbdb7644cd5861f8b751ad34195f5
+  Stored in directory: /tmp/pip-ephem-wheel-cache-mfby9hq5/wheels/ad/3c/7d/d0662fb8760e2215cd22deb7438c0d04d0db043b085c173ecd
+Successfully built daqhats
+Installing collected packages: daqhats
+Successfully installed daqhats-1.4.0.1
+
+
+./install.sh: line 75: raspi-config: command not found
+./install.sh: line 75: [: -eq: unary operator expected
+Install complete
