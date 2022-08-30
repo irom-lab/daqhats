@@ -23,15 +23,15 @@ int main()
     double value;
 
     uint8_t low_chan = 0;
-    uint8_t high_chan = 4; //Pentagon
+    uint8_t high_chan = 5; //Hexagon
 
     char display_string[256] = "";
     char c;
 
     int result = RESULT_SUCCESS;
     int samples_per_channel = 0;
-    int sample_interval = 100;  // ms
-    int duration = 10; // s
+    int sample_interval = 10;  // ms
+    int duration = 30; // s
     int duration_samples = 1000/sample_interval*duration;
     printf("\nduration_samples\n");
     printf("%d\n", duration_samples);
@@ -40,7 +40,7 @@ int main()
     // Set the default filename.
     FILE *fpt;
     fpt = fopen("data.csv", "w+");
-    fprintf(fpt,"A0, A1, A2, A3, A4,\n");
+    fprintf(fpt,"A0, A1, A2, A3, A4, A5,\n");
     //fprintf(fpt,"value\n");
 
 

@@ -1,0 +1,6 @@
+package exlcm;
+struct voltages_t
+{
+    int64_t  timestamp;
+    double   voltages[5];
+}
